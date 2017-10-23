@@ -57,19 +57,43 @@ models.Shoes.find({
 });
 }
 
-const update = function(req, res){
+const update = function(req, res, next){
+ var getId = req.params.id;
+models.Shoes.findOneAndUpdate({_id : getId}, function(err, data){
+}).then(function(data) {
+  if(data.in_stock <= 0){
+    res.json({
+      data: 'Out of stock'
+    });
+  } else {
+    models.Shoes.findOneAndUpdate({
+        _id : req.params.id
+      }, {
+        $inc: {
+          'in_stock' : -1
+        },
+      }, {
+        upsert : false
 
-// var getId = req.params.id;
-//
-// models.Shoes.findOneandUpdate({
-//   _id : ObjectId(getId)
-// }, function())
+      }, function(err, result){
+        console.log(result);
+        if(err){
+          return res.json({
+            sold : []
+          })
+        }else {
+          res.json({
+            sold: result
+          });
+        }
+      });
+  }
+});
 }
 
 const newStock = function(req, res, next){
 
 var newShoe = req.body;
-// console.log(newShoe);
 models.Shoes.create({
       Id: newShoe.Id,
       color: newShoe.color,
