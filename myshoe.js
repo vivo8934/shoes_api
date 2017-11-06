@@ -40,7 +40,7 @@ const size = function(req, res, next) {
     });
   });
 }
-const filter = function(req, res){
+const filter = function(req, res, next){
 var brandName = req.params.brandname;
 var shoeSize = req.params.size;
 
@@ -59,13 +59,13 @@ models.Shoes.find({
 
 const update = function(req, res, next){
  var getId = req.params.id;
-models.Shoes.findOneAndUpdate({_id : getId}, function(err, data){
-}).then(function(data) {
-  if(data.in_stock <= 0){
-    res.json({
-      data: 'Out of stock'
-    });
-  } else {
+models.Shoes.findOneAndUpdate({
+    _id: getId
+  }, function(err, data) {}).then(function(data) {
+      if (data.in_stock <= 0) {
+        res.json({
+          data: 'Out of stock'
+        });  } else {
     models.Shoes.findOneAndUpdate({
         _id : req.params.id
       }, {
@@ -100,7 +100,8 @@ models.Shoes.create({
       brand: newShoe.brand,
       price: newShoe.price,
       size: newShoe.size,
-      in_stock: newShoe.in_stock
+      in_stock: newShoe.in_stock,
+      image: newShoe.image
 }, function(err, newData){
   if (err) {
     if(err.code === 11000){

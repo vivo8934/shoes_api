@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Web page</title>
+  <link rel="stylesheet" href="css/home.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+</head>
+
+<body>
+  <h1>Shoe API</h1>
+
+<h2>Available stock</h2>
+  <script class="Template" type="text/handlebars-x">
+
+  <div id="shopC">
+       {{#each shoes}}
+       <div id="myStock">
+         <div id="details">
+          <img src={{this.image}}><br>
+         <b>Color:</b>{{this.color}}<br>
+         <b>Brand:</b>{{this.brand}}<br>
+         <b>Price:</b> R {{this.price}}<br>
+         <b>Size:</b> {{this.size}}<br>
+         <b>stock:</b> {{this.in_stock}}<br>
+         <button id="{{_id}}" class="Purchase">Buy</button>
+         </div>
+       </div>
+       {{/each}}
+     </div>
+  </script>
+  <br>
+  <div class="allShoes">
+  </div>
+  <br>
+  <div class="container">
+    <form class="User">
+      <label>Brand</label> : <select class="myColor">
+      <script class="TemplateDrop" type="text/handlebars-x">
+     <option value="selector brand" class="color" disabled selected>Select Brand</option>
+  {{#each shoes}}
+      <option name="brand" >{{this}}</option>
+  {{/each}}
+      </script>
+    </select>
+      <label>Size</label> : <select class="DSize" size="1">
+        <script class="SizeDrop" type="text/handlebars-x">
+        <option value="selector size" class="size" disabled selected>Select size</option>
+  {{#each shoes}}
+        <option name="size">{{this}}</option>
+        {{/each}}
+        </script>
+      </select><br><br>
+    </form>
+
+    <!-- <button type="button" name="all" class="allbtn">ALL</button> -->
+</div>
+    <!-- <button type="button" name="search" class='myBtn'>Search</button> -->
+    <b><br><br>
+
+          <div class="inputs">
+            <div class="field">
+              <label>Color:</label><input type="text" class="ColorName" required>
+            </div>
+            <br>
+            <div class="field">
+              <label>Brand:</label> <input type="text" class="brandName" required>
+            </div>
+            <br>
+            <div class="field">
+              <label>Price:</label>
+              <input type="number" class="PriceName" required>
+            </div>
+            <br>
+            <div class="field">
+              <label>Size:</label>
+              <input type="number" class="sizeName" required>
+            </div>
+            <br>
+            <div class="field">
+              <label>Stock:</label>
+              <input type="number" class="stockName" required>
+            </div>
+            <br>
+            <div class="field">
+              <label>Image:</label>
+              <input id="myFileInput" type="file" accept="image/*;" required>
+            </div>
+<br>
+            <div class="Btns">
+              <input type="button" class="enter" value="enter">
+            </div>
+
+        </div>
+      <script src="shoe_api.js" charset="utf-8"></script>
+        <script src="home.js" charset="utf-8"></script>
+</body>
+</html>

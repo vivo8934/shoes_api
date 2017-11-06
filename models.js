@@ -13,7 +13,8 @@ const shoesSchema = mongoose.Schema({
   brand : String,
   price : Number,
   size  : Number,
-  in_stock : Number
+  in_stock : Number,
+  image: String
 });
 
 shoesSchema.index({
