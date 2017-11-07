@@ -39,8 +39,8 @@ table{
     border-color: 2px solid red;
   }
   img{
-    height: 150px;
-    width: 100%;
+    height: 200px;
+   width: 200px;
   }
   .container {
       padding: 16px;
@@ -48,5 +48,5 @@ table{
       margin-left: 10px;
 }
 #enter{
-  background-color: white;
+  background-color: blue;
 }

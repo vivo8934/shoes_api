@@ -4,7 +4,7 @@ var MyTemp = document.querySelector('.Template');
 var colorDrop = document.querySelector('.TemplateDrop').innerHTML;
 var displayColor = document.querySelector('.myColor')
 var sizeDrop = document.querySelector('.SizeDrop').innerHTML;
-var search = document.querySelector('.myBtn')
+var All = document.querySelector('.myBtn')
 
 var TempInstance = Handlebars.compile(MyTemp.innerHTML);
 var ColorInstance = Handlebars.compile(colorDrop);
@@ -149,4 +149,5 @@ $('.allShoes').on('click', function(e) {
   window.location.reload();
   //myData.success();
 })
+
 })
