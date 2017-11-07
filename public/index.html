@@ -7,19 +7,22 @@
   <link rel="stylesheet" href="css/home.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-
 <body>
   <h1>Shoe API</h1>
 
 <h2>Available stock</h2>
+<div class="container">
   <script class="Template" type="text/handlebars-x">
 
   <div id="shopC">
        {{#each shoes}}
-       <div id="myStock">
-         <div id="details">
-          <img src={{this.image}}><br>
+       <div id="panel panel-primary">
+         <div id="panel-body">
+          <img src={{this.image}} class="img-responsive"><br><br>
          <b>Color:</b>{{this.color}}<br>
          <b>Brand:</b>{{this.brand}}<br>
          <b>Price:</b> R {{this.price}}<br>
@@ -61,7 +64,7 @@
     <b><br><br>
 
           <div class="inputs">
-            <div class="field">
+             <!-- <div class="field">
               <label>Color:</label><input type="text" class="ColorName" required>
             </div>
             <br>
@@ -86,15 +89,62 @@
             <br>
             <div class="field">
               <label>Image:</label>
-              <input id="myFileInput" type="file" accept="image/*;" required>
+              <input type="text" class="image" required>
             </div>
 <br>
             <div class="Btns">
               <input type="button" class="enter" value="enter">
-            </div>
+            </div> -->
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add new stock</button>
+
+             <!-- Modal -->
+             <div class="modal fade" id="myModal" role="dialog">
+               <div class="modal-dialog">
+
+                 <!-- Modal content-->
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">New Stock</h4>
+                   </div>
+                   <div class="modal-body">
+                    <div class="form-group">
+             <label for="color">Color:</label>
+             <input type="text" class="form-control" id="ColorName">
+           </div>
+           <div class="form-group">
+             <label for="brand">Brand:</label>
+             <input type="text" class="form-control" id="brandName">
+           </div>
+           <div class="form-group">
+             <label for="price">Price:</label>
+             <input type="number" class="form-control" id="PriceName">
+           </div>
+           <div class="form-group">
+             <label for="size">Size:</label>
+             <input type="number" class="form-control" id="sizeName">
+           </div>
+           <div class="form-group">
+             <label for="stock">Stock:</label>
+             <input type="number" class="form-control" id="stockName">
+           </div>
+           <div class="form-group">
+             <label for="image">Image:</label>
+             <input type="url" class="form-control" id="image">
+           </div>
+                   </div>
+                   <div class="modal-footer">
+                   <button type="button" class="btn btn-default" id="enter">ADD</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                   </div>
+                 </div>
+
+               </div>
+             </div>
 
         </div>
       <script src="shoe_api.js" charset="utf-8"></script>
         <script src="home.js" charset="utf-8"></script>
+</div>
 </body>
 </html>

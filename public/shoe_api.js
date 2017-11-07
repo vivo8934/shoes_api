@@ -49,20 +49,28 @@ document.querySelector('.myColor').innerHTML = ColorInstance({
  });
   }
 });
-$('.enter').on('click', function(){
-  var Color = document.querySelector('.ColorName').value;
-  var Brand = document.querySelector('.brandName').value;
-  var Price = document.querySelector('.PriceName').value;
-  var Size = document.querySelector('.sizeName').value;
-  var Stock = document.querySelector('.stockName').value;
+$('#enter').on('click', function(){
+  var Color = document.querySelector('#ColorName').value;
+  var Brand = document.querySelector('#brandName').value;
+  var Price = document.querySelector('#PriceName').value;
+  var Size = document.querySelector('#sizeName').value;
+  var Stock = document.querySelector('#stockName').value;
+var Image = document.querySelector('#image').value
+
+if (Color.length == 0 || Brand.length == 0 || Price.length == 0 || Size.length == 0 || Stock.length == 0) {
+  AllShoes.innerHTML = "Please fill all the required flield to add stock.";
+}
+else {
 
 var myData = {
   color : Color,
   brand : Brand,
   price : Price,
   size :  Size,
-  in_stock : Stock
+  in_stock : Stock,
+  image: Image
 }
+
 
 //console.log(myData);
 $.ajax({
@@ -77,6 +85,7 @@ $.ajax({
   });
   }
 })
+}
 window.location.reload();
 });
 
