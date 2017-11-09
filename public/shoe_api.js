@@ -75,8 +75,17 @@ var myData = {
   price : Price,
   size :  Size,
   in_stock : Stock,
-  image: Image
+  image: Image,
+
+  Color : "",
+  Brand : "",
+  Price : "",
+  Size : "",
+  Stock : "",
+  Image : ""
 }
+
+
 //console.log(myData);
 $.ajax({
   url: '/api/shoes',
@@ -92,6 +101,7 @@ $.ajax({
 })
 }
 showStock();
+$('#myModal').modal('close')
 }
 Enter.addEventListener('click', addStock);
 
@@ -140,7 +150,6 @@ else  if(size !== 'selector size' && brand === 'selector brand'){
 }
 container.addEventListener('change', filtering);
 
-//var buyShoe = document.querySelector('.Purchase');
 
 function buyingShoe(e){
 
@@ -150,11 +159,8 @@ function buyingShoe(e){
     url: '/api/shoes/sold/' + _id,
     type: 'POST',
     success: function(purchased) {
-      AllShoes.innerHTML = TempInstance({
-        shoes: purchased
-      });
+      showStock();
     }
   })
-  showStock();
 }
 AllShoes.addEventListener('click', buyingShoe);
