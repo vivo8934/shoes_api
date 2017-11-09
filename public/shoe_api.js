@@ -13,7 +13,7 @@ var SizeInstance = Handlebars.compile(sizeDrop);
 $(document).ready(function(){
   console.log("loading");
 $.ajax({
-  url: 'http://localhost:4500/api/shoes',
+  url: '/api/shoes',
   type: 'GET',
   success: function(data){
     AllShoes.innerHTML = TempInstance({
@@ -74,7 +74,7 @@ var myData = {
 
 //console.log(myData);
 $.ajax({
-  url: 'http://localhost:4500/api/shoes',
+  url: '/api/shoes',
   type: 'POST',
   data: myData,
   dataType: 'application/json',
