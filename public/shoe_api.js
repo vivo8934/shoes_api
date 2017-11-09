@@ -5,13 +5,15 @@ var colorDrop = document.querySelector('.TemplateDrop').innerHTML;
 var displayColor = document.querySelector('.myColor')
 var sizeDrop = document.querySelector('.SizeDrop').innerHTML;
 var All = document.querySelector('.myBtn')
+var Enter = document.querySelector('#enter');
+var container = document.querySelector('.container');
+
 
 var TempInstance = Handlebars.compile(MyTemp.innerHTML);
 var ColorInstance = Handlebars.compile(colorDrop);
 var SizeInstance = Handlebars.compile(sizeDrop);
 
-$(document).ready(function(){
-  console.log("loading");
+function showStock(){
 $.ajax({
   url: '/api/shoes',
   type: 'GET',
@@ -49,18 +51,23 @@ document.querySelector('.myColor').innerHTML = ColorInstance({
  });
   }
 });
-$('#enter').on('click', function(){
-  var Color = document.querySelector('#ColorName').value;
-  var Brand = document.querySelector('#brandName').value;
-  var Price = document.querySelector('#PriceName').value;
-  var Size = document.querySelector('#sizeName').value;
-  var Stock = document.querySelector('#stockName').value;
-var Image = document.querySelector('#image').value
-
-if (Color.length == 0 || Brand.length == 0 || Price.length == 0 || Size.length == 0 || Stock.length == 0) {
-  AllShoes.innerHTML = "Please fill all the required flield to add stock.";
 }
-else {
+//show all the stock
+showStock();
+
+function addStock(){
+
+  var Color = document.querySelector('#ColorName').value;
+    var Brand = document.querySelector('#brandName').value;
+    var Price = document.querySelector('#PriceName').value;
+    var Size = document.querySelector('#sizeName').value;
+    var Stock = document.querySelector('#stockName').value;
+  var Image = document.querySelector('#image').value
+
+  if (Color.length == 0 || Brand.length == 0 || Price.length == 0 || Size.length == 0 || Stock.length == 0) {
+    AllShoes.innerHTML = "Please fill all the required flield to add stock.";
+  }
+  else {
 
 var myData = {
   color : Color,
@@ -70,8 +77,6 @@ var myData = {
   in_stock : Stock,
   image: Image
 }
-
-
 //console.log(myData);
 $.ajax({
   url: '/api/shoes',
@@ -86,15 +91,17 @@ $.ajax({
   }
 })
 }
-window.location.reload();
-});
+showStock();
+}
+Enter.addEventListener('click', addStock);
 
-$('.container').on('change', function(e){
-var brand = document.querySelector('.myColor').value;
+function filtering(){
+
+  var brand = document.querySelector('.myColor').value;
 var size = document.querySelector('.DSize').value;
-var allShoes = document.querySelector('.allShoes');
-console.log(brand);
-console.log(size);
+//var allShoes = document.querySelector('.allShoes');
+
+
 if (brand !== 'selector brand' && size !== 'selector size') {
  $.ajax({
    url: '/api/shoes/brand/'+brand+'/size/'+size,
@@ -118,36 +125,36 @@ if (brand !== 'selector brand' && size !== 'selector size') {
     }
   })
 }
- else  if(size !== 'selector size' && brand === 'selector brand'){
+else  if(size !== 'selector size' && brand === 'selector brand'){
    $.ajax({
      url: '/api/shoes/size/' + size,
      type: 'GET',
      success: function(filteredSize){
        console.log(filteredSize);
-       allShoes.innerHTML = TempInstance({
+       AllShoes.innerHTML = TempInstance({
          shoes : filteredSize.sizes
        });
      }
    })
  }
+}
+container.addEventListener('change', filtering);
 
-})
+//var buyShoe = document.querySelector('.Purchase');
 
-$('.allShoes').on('click', function(e) {
-  //alert('my sold items')
+function buyingShoe(e){
+
   var _id = e.target.id;
-  console.log(_id);
+   console.log(_id);
   $.post({
     url: '/api/shoes/sold/' + _id,
     type: 'POST',
     success: function(purchased) {
-      allShoes.innerHTML = TempInstance({
+      AllShoes.innerHTML = TempInstance({
         shoes: purchased
       });
     }
   })
-  window.location.reload();
-  //myData.success();
-})
-
-})
+  showStock();
+}
+AllShoes.addEventListener('click', buyingShoe);
