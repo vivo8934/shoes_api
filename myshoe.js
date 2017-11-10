@@ -65,7 +65,8 @@ models.Shoes.findOneAndUpdate({
       if (data.in_stock <= 0) {
         res.json({
           data: 'Out of stock'
-        });  } else {
+        });
+      } else {
     models.Shoes.findOneAndUpdate({
         _id : req.params.id
       }, {

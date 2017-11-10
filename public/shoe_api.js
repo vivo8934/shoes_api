@@ -62,7 +62,8 @@ function addStock(){
     var Price = document.querySelector('#PriceName').value;
     var Size = document.querySelector('#sizeName').value;
     var Stock = document.querySelector('#stockName').value;
-  var Image = document.querySelector('#image').value
+  var Image = document.querySelector('#image').value;
+
 
   if (Color.length == 0 || Brand.length == 0 || Price.length == 0 || Size.length == 0 || Stock.length == 0) {
     AllShoes.innerHTML = "Please fill all the required flield to add stock.";
@@ -75,15 +76,14 @@ var myData = {
   price : Price,
   size :  Size,
   in_stock : Stock,
-  image: Image,
-
-  Color : "",
-  Brand : "",
-  Price : "",
-  Size : "",
-  Stock : "",
-  Image : ""
+  image: Image
 }
+document.querySelector('#ColorName').value = "";
+document.querySelector('#brandName').value = "";
+document.querySelector('#PriceName').value = "";
+document.querySelector('#sizeName').value = "";
+ document.querySelector('#stockName').value  = "";
+document.querySelector('#image').value = "";
 
 
 //console.log(myData);
@@ -93,15 +93,11 @@ $.ajax({
   data: myData,
   dataType: 'application/json',
   success: function(result){
-    console.log(result);
-  AllShoes.innerHTML = TempInstance({
-    shoes : newData.myData
-  });
+    showStock();
   }
 })
 }
-showStock();
-$('#myModal').modal('close')
+
 }
 Enter.addEventListener('click', addStock);
 
@@ -132,6 +128,7 @@ if (brand !== 'selector brand' && size !== 'selector size') {
         AllShoes.innerHTML = TempInstance({
           shoes : filteredBrand.newBrand
         });
+
     }
   })
 }
@@ -145,7 +142,10 @@ else  if(size !== 'selector size' && brand === 'selector brand'){
          shoes : filteredSize.sizes
        });
      }
+
    })
+
+   showStock();
  }
 }
 container.addEventListener('change', filtering);
