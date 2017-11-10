@@ -13,6 +13,9 @@ var TempInstance = Handlebars.compile(MyTemp.innerHTML);
 var ColorInstance = Handlebars.compile(colorDrop);
 var SizeInstance = Handlebars.compile(sizeDrop);
 
+
+
+
 function showStock(){
 $.ajax({
   url: '/api/shoes',
@@ -144,8 +147,6 @@ else  if(size !== 'selector size' && brand === 'selector brand'){
      }
 
    })
-
-   showStock();
  }
 }
 container.addEventListener('change', filtering);
@@ -164,3 +165,8 @@ function buyingShoe(e){
   })
 }
 AllShoes.addEventListener('click', buyingShoe);
+
+function allStock(){
+  showStock();
+}
+All.addEventListener('click', allStock);
